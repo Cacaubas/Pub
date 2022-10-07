@@ -1,4 +1,4 @@
-Public Forum created for content disseminated using Freechains
+Forum publico for sharing a cookbook
 
 Freechains is a permissionless peer-to-peer publish-subscribe content
 dissemination protocol.
@@ -11,7 +11,8 @@ consolidated posts.
 between them.
 - The resource timestamp indicate the age of the peer in the chain. 
 #
-For this simulation a public forum was created using freechains commands.
+Para este exercicio um Forum publico foi criado usando comandos freechains.
+
 
 1. starts the local peer to serve requests 
 
@@ -19,24 +20,24 @@ $freechains-host start /tmp/freechains
    
 2. Create an identity
 
-(Switch to another terminal)
+(Switch to another terminal) foi realizado em dez terminais
 
 $freechains keys (pubpvt) <passphrase>
 
 3. Prepares host to serve a chain
 
-$freechains chains join '#pub' '<private key>'
+$freechains keys (pubpvt) <passphrase>
 
 4. Post some contents
 
-$freechains chain '#pub' post inline "my contents line 1"
+$freechains chain '#receitas' post inline "Receitas faceis"
 1_DE2EF0...
 
 At this point the Forum is created.
 #
-From then, start others freechains hosts. (were created four hosts)
+From then, start others freechains hosts. (were created ten hosts)
 
-$freechains-host --port=833(1/2/3/4...) start /tmp/othost_(1/2/3/4...)
+$freechains-host --port=833(1/2/3/4..10.) start /tmp/othost_(1/2/3/4...)
 
 1. Create an identity: 
 
@@ -44,42 +45,46 @@ $freechains keys pubpvt <passphrase>
 
 2. Join the public forum using the private keys
 
-$freechains chains join #pub <private key>
+$freechains chains join #receitas <private key>
 
 3. Synchronize with the first host 
 
-$freechains peer <host:port> (send | recv) '#pub'
+$freechains peer <host:port> (send | recv) '#receitas'
 
-#
 Iterate over posts in a chain:
 
 Shows the consensus order of posts in the chain.
 Reads the posts payloads.
 
-$ freechains --host=localhost:8331 chain '#pub' consensus
+$ freechains --host=localhost:8331 chain '#receitas' consensus
 
 0_C40DBB... 1_DE2EF0... 2_317441...
 
 #
 Reads the posts payloads
 
-$ freechains --host=localhost:8331 chain '#pub' get payload 1_DE2EF0...
+$ freechains --host=localhost:8331 chain '#receitas' get payload 1_DE2EF0...
 
-my contents line 1
+Brigadeiro
 
-$ freechains --host=localhost:8331 chain '#pub' get payload 2_317441...
+$ freechains --host=localhost:8331 chain '#receitas' get payload 2_317441...
 
-my contents line 2
+Bolo rapido
 
 #
-Gets the reputation of author (public key)
+Gets the reputation of block (public key)
 
-$freechains chain '#pub reps <public key>
+$freechains chain '#receitas reps  <hash of block>
 
-In first day, as only the Forum's creator had reps, only his blocks has been appeared in consensus questions 
 #
-Doubts:
+Using  Likes block in the chain.
+   
+$ freechains chain '#receitas' like '3_51C7BD...' --sign='<my-pvtkey>' --why='A receita bem facil'
 
-In 24h, the reps of Autor was increased, but only one other user had his reps incresed. 
+Using to simulate the passage of time of nodes.
+$freechains-host now <timestamp>
+188516584433068609
+   
+#
+Utilizamo
 
-Other situation that i didn't be able to explain was the fact that the blocks in this chain hadn't their reps increased.
