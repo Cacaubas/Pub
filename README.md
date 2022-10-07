@@ -82,7 +82,9 @@ Using  Likes block in the chain.
 $ freechains chain '#receitas' like '3_51C7BD...' --sign='<my-pvtkey>' --why='A receita bem facil'
 
 Using to simulate the passage of time of nodes.
+
 $freechains-host now <timestamp>
+   
 188516584433068609
    
 #
