@@ -72,7 +72,7 @@ $ freechains --host=localhost:8331 chain '#receitas' get payload 2_317441...
 Bolo rapido
 
 #
-Gets the reputation of block (public key)
+Gets the reputation of block (public key), more reputations means that the block has been tested and approved.
 
 $freechains chain '#receitas reps  <hash of block>
 
@@ -87,6 +87,5 @@ $freechains-host now <timestamp>
    
 188516584433068609
    
-#
-Utilizamo
+
 
